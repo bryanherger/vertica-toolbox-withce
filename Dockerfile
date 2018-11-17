@@ -5,10 +5,11 @@ FROM bryanherger/vertica-toolbox
 LABEL maintainer="Bryan Herger <bherger@users.sf.net>"
 
 # copy examples
-RUN git clone https://github.com/bryanherger/vertica-examples && cp -r vertica-example/* vertica-examples/ && rm -rf vertica-example/
+RUN git clone https://github.com/bryanherger/vertica-examples && cp -r vertica-example/* vertica-examples/
 
 # final setup
 USER root
+RUN rm -rf vertica-example/
 RUN apt-get install --no-install-recommends -y dialog net-tools openssh-server openssh-client iproute2
 RUN echo "jovyan ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 COPY debian_cleaner.sh /tmp/
